@@ -64,8 +64,16 @@ function App() {
     } else if (callState === State.IDLE) {
       client
           .start({
-            prompt: "You're a helpful assistant",
-            voice: {provider: "elevenlabs", voice_id: "Rachel"},
+            agent: {
+              agent_config: {
+                prompt: "You're a helpful assistant",
+                voice: {provider: "elevenlabs", voice_id: "Rachel"},
+                first_message: "Hello {name}, how can I help you?",
+              }
+            },
+            metadata: {
+              name: "John Doe"
+            }
           })
           .catch(console.error);
       setCallState(State.CONNECTING);
